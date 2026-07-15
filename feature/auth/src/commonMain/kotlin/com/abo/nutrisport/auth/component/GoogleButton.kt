@@ -30,12 +30,11 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.abo.nutrisport.FontSize
-import com.abo.nutrisport.Gray
-import com.abo.nutrisport.GrayDarker
 import com.abo.nutrisport.IconSecondary
 import com.abo.nutrisport.Resources
+import com.abo.nutrisport.SurfaceDarker
+import com.abo.nutrisport.SurfaceLighter
 import com.abo.nutrisport.TextPrimary
-import kotlinx.serialization.EncodeDefault
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
@@ -47,8 +46,8 @@ fun GoogleButton(
     secondaryText: String = "Please wait...",
     icon: DrawableResource = Resources.Image.GoogleLogo,
     shape: Shape = RoundedCornerShape(size = 99.dp),
-    backgroundColor: Color = Gray,
-    borderColor: Color = GrayDarker,
+    backgroundColor: Color = SurfaceLighter,
+    borderColor: Color = SurfaceDarker,
     progressIndicatorColor: Color = IconSecondary,
     onCLick: () -> Unit = {},
 ) {
@@ -74,7 +73,11 @@ fun GoogleButton(
             AnimatedVisibility(
                 visible = !loadingState
             ) {
-                Icon(painter = painterResource(icon), tint = Color.Unspecified, contentDescription = "Google Logo")
+                Icon(
+                    painter = painterResource(icon),
+                    tint = Color.Unspecified,
+                    contentDescription = "Google Logo"
+                )
             }
             AnimatedVisibility(
                 visible = loadingState,

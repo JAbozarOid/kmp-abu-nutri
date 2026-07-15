@@ -36,9 +36,17 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
+            implementation(project.dependencies.platform(libs.firebase.bom))
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.splash.screen)
         }
+
+        val androidHostTest by getting {
+            dependencies {
+                implementation(project.dependencies.platform(libs.firebase.bom))
+            }
+        }
+
         commonMain.dependencies {
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
@@ -49,6 +57,8 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.messagebar.kmp)
+            implementation(libs.auth.kmp)
+            implementation(libs.auth.firebase.kmp)
             implementation(project(path = ":shared"))
         }
         commonTest.dependencies {

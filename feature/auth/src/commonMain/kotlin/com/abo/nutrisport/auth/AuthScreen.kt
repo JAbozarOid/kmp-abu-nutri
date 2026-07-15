@@ -9,6 +9,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -22,11 +26,13 @@ import com.abo.nutrisport.Surface
 import com.abo.nutrisport.TextPrimary
 import com.abo.nutrisport.TextSecondary
 import com.abo.nutrisport.auth.component.GoogleButton
+import com.mmk.kmpauth.firebase.google.GoogleButtonUiContainerFirebase
 import rememberMessageBarState
 
 @Composable
 fun AuthScreen() {
     val messageBarState = rememberMessageBarState()
+    var loadingState by remember { mutableStateOf(false) }
 
     Scaffold { paddingValues ->
         ContentWithMessageBar(
@@ -62,7 +68,19 @@ fun AuthScreen() {
                         color = TextPrimary
                     )
                 }
-                GoogleButton()
+                GoogleButtonUiContainerFirebase(
+                    linkAccount = false,
+                    onResult = {result->
+                        result.onSuccess {user ->
+
+                        }.onFailure { error-> }
+                    }
+                ){
+                    GoogleButton(
+                        loadingState = loadingState,
+                        onCLick = {this@GoogleButtonUiContainerFirebase.onClick()}
+                    )
+                }
             }
         }
     }

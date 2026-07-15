@@ -18,6 +18,7 @@ navigation = "2.9.2"
 auth = "2.3.1"
 notifier = "1.6.1"
 firebase = "2.4.0"
+firebase-bom = "33.9.0"
 koin = "4.2.1"
 runtime = "1.11.0"
 serialization = "1.11.0"
@@ -56,6 +57,7 @@ auth-kmp = { module = "io.github.mirzemehdi:kmpauth-google", version.ref = "auth
 auth-firebase-kmp = { module = "io.github.mirzemehdi:kmpauth-firebase", version.ref = "auth" }
 kmp-notifier = { module = "io.github.mirzemehdi:kmpnotifier", version.ref = "notifier" }
 
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
 firebase-app = { module = "dev.gitlive:firebase-app", version.ref = "firebase" }
 firebase-firestore = { module = "dev.gitlive:firebase-firestore", version.ref = "firebase" }
 firebase-storage = { module = "dev.gitlive:firebase-storage", version.ref = "firebase" }
