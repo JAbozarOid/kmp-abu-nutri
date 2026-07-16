@@ -28,6 +28,7 @@ import com.abo.nutrisport.TextSecondary
 import com.abo.nutrisport.auth.component.GoogleButton
 import com.mmk.kmpauth.firebase.google.GoogleButtonUiContainerFirebase
 import rememberMessageBarState
+import kotlin.math.log
 
 @Composable
 fun AuthScreen() {
@@ -72,13 +73,30 @@ fun AuthScreen() {
                     linkAccount = false,
                     onResult = {result->
                         result.onSuccess {user ->
-
-                        }.onFailure { error-> }
+                            loadingState = false
+                            messageBarState.addSuccess("Authentication successful")
+                           println("Authentication successful $user")
+                        }.onFailure { error->
+                            if (error.message?.contains("A network error") == true) {
+                                messageBarState.addError("Internet connection unavailable.")
+                                println("Internet connection unavailable.")
+                            } else if (error.message?.contains("Idtoken is null") == true){
+                                messageBarState.addError("Sign in cancel.")
+                                println("ISign in cancel.")
+                            }
+                            else {
+                                messageBarState.addError(error.message ?: "unknown error.")
+                                println("unknown error.")
+                            }
+                            loadingState = false
+                        }
                     }
                 ){
                     GoogleButton(
                         loadingState = loadingState,
-                        onCLick = {this@GoogleButtonUiContainerFirebase.onClick()}
+                        onCLick = {
+                            loadingState = true
+                            this@GoogleButtonUiContainerFirebase.onClick()}
                     )
                 }
             }

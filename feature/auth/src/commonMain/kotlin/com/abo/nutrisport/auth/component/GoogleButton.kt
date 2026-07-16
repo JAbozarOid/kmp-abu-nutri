@@ -1,6 +1,6 @@
 package com.abo.nutrisport.auth.component
 
-import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.border
@@ -70,23 +70,21 @@ fun GoogleButton(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            AnimatedVisibility(
-                visible = !loadingState
-            ) {
-                Icon(
-                    painter = painterResource(icon),
-                    tint = Color.Unspecified,
-                    contentDescription = "Google Logo"
-                )
-            }
-            AnimatedVisibility(
-                visible = loadingState,
-            ) {
-                CircularProgressIndicator(
-                    modifier = Modifier.size(24.dp),
-                    color = progressIndicatorColor,
-                    strokeWidth = 2.dp
-                )
+            AnimatedContent(targetState = loadingState){
+                loadingState ->
+                if (!loadingState){
+                    Icon(
+                        painter = painterResource(icon),
+                        tint = Color.Unspecified,
+                        contentDescription = "Google Logo"
+                    )
+                }else{
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(24.dp),
+                        color = progressIndicatorColor,
+                        strokeWidth = 2.dp
+                    )
+                }
             }
             Spacer(modifier = Modifier.width(12.dp))
             Text(text = buttonText, color = TextPrimary, fontSize = FontSize.REGULAR)

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "557941920314",
+    "project_id": "abonutrisport",
+    "storage_bucket": "abonutrisport.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557941920314:android:1d23301bad56c5d2fb1b03",
+        "android_client_info": {
+          "package_name": "com.abo.nutrisport"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557941920314-itg95o215qv2palengghljs574a9ir19.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiPiMSXqPkl14gBdwxMiRMnPdk6g0eSVk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557941920314-itg95o215qv2palengghljs574a9ir19.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
