@@ -1,8 +1,8 @@
 package com.abo.nutrisport
 
-import abonutrisport.shared.generated.resources.Res
-import abonutrisport.shared.generated.resources.bebas_neue_regular
-import abonutrisport.shared.generated.resources.roboto_condensed_medium
+import abonutrisport.core.ui.generated.resources.Res
+import abonutrisport.core.ui.generated.resources.bebas_neue_regular
+import abonutrisport.core.ui.generated.resources.roboto_condensed_medium
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp

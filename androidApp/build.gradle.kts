@@ -13,8 +13,9 @@ kotlin {
     }
 }
 dependencies {
-    implementation(projects.shared)
-    implementation(projects.navigation)
+    api(project(path = ":navigation"))
+    api(project(path = ":shared"))
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.splash.screen)
     implementation(libs.compose.uiToolingPreview)

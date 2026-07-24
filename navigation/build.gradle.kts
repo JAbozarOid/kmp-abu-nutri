@@ -48,6 +48,8 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+
+            implementation(project(path = ":core:ui"))
             implementation(project(path = ":feature:auth"))
         }
         commonTest.dependencies {

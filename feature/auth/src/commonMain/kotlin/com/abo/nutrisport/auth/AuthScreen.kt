@@ -28,7 +28,6 @@ import com.abo.nutrisport.TextSecondary
 import com.abo.nutrisport.auth.component.GoogleButton
 import com.mmk.kmpauth.firebase.google.GoogleButtonUiContainerFirebase
 import rememberMessageBarState
-import kotlin.math.log
 
 @Composable
 fun AuthScreen() {

@@ -48,6 +48,10 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.auth.kmp)
+            implementation(libs.firebase.app)
+            implementation(project.dependencies.platform(libs.firebase.bom))
+            implementation(project(path = ":navigation"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
