@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<journey name="Authentication Flow">
+    <step>Tap "Sign In"</step>
+    <step>Type "test@example.com" in the email field</step>
+    <step>Type "password123" in the password field</step>
+    <step>Tap "Login"</step>
+    <step>Verify that the home screen is displayed</step>
+</journey>

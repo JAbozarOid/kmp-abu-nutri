@@ -23,8 +23,11 @@ import com.abo.nutrisport.Alpha
 import com.abo.nutrisport.BebasNeueFont
 import com.abo.nutrisport.FontSize
 import com.abo.nutrisport.Surface
+import com.abo.nutrisport.SurfaceBrand
+import com.abo.nutrisport.SurfaceError
 import com.abo.nutrisport.TextPrimary
 import com.abo.nutrisport.TextSecondary
+import com.abo.nutrisport.TextWhite
 import com.abo.nutrisport.auth.component.GoogleButton
 import com.mmk.kmpauth.firebase.google.GoogleButtonUiContainerFirebase
 import rememberMessageBarState
@@ -43,6 +46,13 @@ fun AuthScreen() {
             ),
             messageBarState = messageBarState,
             errorMaxLines = 2,
+            errorContainerColor = SurfaceError,
+            errorContentColor = TextWhite,
+            successContainerColor = SurfaceBrand,
+            successContentColor = TextPrimary,
+
+
+
         ) {
             Column(
                 modifier = Modifier.fillMaxSize().padding(24.dp)

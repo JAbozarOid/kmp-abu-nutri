@@ -47,6 +47,16 @@ android {
             isMinifyEnabled = false
         }
     }
+    testOptions {
+        suites {
+            create<com.android.build.api.dsl.AgpTestSuite>("journeysTest") {
+                targetVariants += listOf("debug")
+                useJunitEngine {
+                    com.android.build.api.dsl.DefaultInputsForAgpTestSuites.JOURNEYS_TEST.initialize(this)
+                }
+            }
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
