@@ -13,13 +13,13 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "auth"
+            baseName = "di"
             isStatic = true
         }
     }
 
     androidLibrary {
-        namespace = "com.abo.nutrisport.auth"
+        namespace = "com.abo.nutrisport.di"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
 
@@ -35,16 +35,6 @@ kotlin {
     }
 
     sourceSets {
-        androidMain.dependencies {
-            implementation(project.dependencies.platform(libs.firebase.bom))
-        }
-
-        val androidHostTest by getting {
-            dependencies {
-                implementation(project.dependencies.platform(libs.firebase.bom))
-            }
-        }
-
         commonMain.dependencies {
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
@@ -54,10 +44,10 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation(libs.messagebar.kmp)
-            implementation(libs.auth.kmp)
-            implementation(libs.auth.firebase.kmp)
-            implementation(project(path = ":core:ui"))
+
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

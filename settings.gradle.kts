@@ -16,6 +16,7 @@ dependencyResolutionManagement {
     }
 }
 include(":core:ui")
+include(":di")
 
 include(":feature:auth")
 include(":navigation")

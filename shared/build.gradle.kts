@@ -35,10 +35,6 @@ kotlin {
     }
     
     sourceSets {
-        androidMain.dependencies {
-            implementation(libs.compose.uiToolingPreview)
-            implementation(libs.splash.screen)
-        }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
@@ -52,6 +48,7 @@ kotlin {
             implementation(libs.firebase.app)
             implementation(project.dependencies.platform(libs.firebase.bom))
             implementation(project(path = ":navigation"))
+            api(project(path = ":di"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

@@ -15,7 +15,9 @@ kotlin {
 dependencies {
     api(project(path = ":navigation"))
     api(project(path = ":shared"))
+    api(project(path = ":di"))
 
+    implementation(libs.koin.android) // pass android context to koin
     implementation(libs.androidx.activity.compose)
     implementation(libs.splash.screen)
     implementation(libs.compose.uiToolingPreview)
