@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.serialization)
 }
 
 kotlin {
@@ -14,13 +13,13 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "navigation"
+            baseName = "data"
             isStatic = true
         }
     }
 
     androidLibrary {
-        namespace = "com.abo.nutrisport.navigation"
+        namespace = "com.abo.nutrisport.data"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
 
@@ -36,7 +35,6 @@ kotlin {
     }
 
     sourceSets {
-
         commonMain.dependencies {
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
@@ -46,12 +44,15 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation(libs.kotlinx.serialization)
-            implementation(libs.compose.navigation)
+
             implementation(libs.auth.kmp)
-            implementation(project(path = ":core:ui"))
+            implementation(libs.auth.firebase.kmp)
+            implementation(libs.firebase.app)
+            implementation(project.dependencies.platform(libs.firebase.bom))
+            implementation(libs.firebase.firestore)
+
             implementation(project(path = ":shared"))
-            implementation(project(path = ":feature:auth"))
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

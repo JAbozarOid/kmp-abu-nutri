@@ -29,11 +29,14 @@ import com.abo.nutrisport.TextPrimary
 import com.abo.nutrisport.TextSecondary
 import com.abo.nutrisport.TextWhite
 import com.abo.nutrisport.auth.component.GoogleButton
+import com.abo.nutrisport.auth.viewmodel.AuthViewModel
 import com.mmk.kmpauth.firebase.google.GoogleButtonUiContainerFirebase
+import org.koin.compose.viewmodel.koinViewModel
 import rememberMessageBarState
 
 @Composable
 fun AuthScreen() {
+    val viewModel = koinViewModel<AuthViewModel>()
     val messageBarState = rememberMessageBarState()
     var loadingState by remember { mutableStateOf(false) }
 
@@ -52,8 +55,7 @@ fun AuthScreen() {
             successContentColor = TextPrimary,
 
 
-
-        ) {
+            ) {
             Column(
                 modifier = Modifier.fillMaxSize().padding(24.dp)
             ) {
@@ -80,32 +82,41 @@ fun AuthScreen() {
                 }
                 GoogleButtonUiContainerFirebase(
                     linkAccount = false,
-                    onResult = {result->
-                        result.onSuccess {user ->
+                    onResult = { result ->
+                        result.onSuccess { user ->
                             loadingState = false
-                            messageBarState.addSuccess("Authentication successful")
-                           println("Authentication successful $user")
-                        }.onFailure { error->
+                            viewModel.createCustomer(
+                                user = user,
+                                onSuccess = {
+                                    println("Authentication successful $user")
+                                    messageBarState.addSuccess("Authentication successful")
+                                },
+                                onError = {message->
+                                    println("Authentication failed $message")
+                                    messageBarState.addError(message)
+                                }
+                            )
+                        }.onFailure { error ->
                             if (error.message?.contains("A network error") == true) {
                                 messageBarState.addError("Internet connection unavailable.")
                                 println("Internet connection unavailable.")
-                            } else if (error.message?.contains("Idtoken is null") == true){
+                            } else if (error.message?.contains("Idtoken is null") == true) {
                                 messageBarState.addError("Sign in cancel.")
                                 println("ISign in cancel.")
-                            }
-                            else {
+                            } else {
                                 messageBarState.addError(error.message ?: "unknown error.")
                                 println("unknown error.")
                             }
                             loadingState = false
                         }
                     }
-                ){
+                ) {
                     GoogleButton(
                         loadingState = loadingState,
                         onCLick = {
                             loadingState = true
-                            this@GoogleButtonUiContainerFirebase.onClick()}
+                            this@GoogleButtonUiContainerFirebase.onClick()
+                        }
                     )
                 }
             }

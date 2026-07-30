@@ -5,18 +5,12 @@ plugins {
     alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.serialization)
 }
 
 kotlin {
-    listOf(
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = "Shared"
-            isStatic = true
-        }
-    }
+    iosArm64()
+    iosSimulatorArm64()
     
     androidLibrary {
        namespace = "com.abo.nutrisport.shared"
@@ -24,7 +18,7 @@ kotlin {
        minSdk = libs.versions.android.minSdk.get().toInt()
     
        compilerOptions {
-           jvmTarget = JvmTarget.JVM_11
+           jvmTarget = JvmTarget.JVM_17
        }
        androidResources {
            enable = true
@@ -44,11 +38,10 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.kotlinx.serialization)
             implementation(libs.auth.kmp)
             implementation(libs.firebase.app)
             implementation(project.dependencies.platform(libs.firebase.bom))
-            implementation(project(path = ":navigation"))
-            api(project(path = ":di"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

@@ -13,7 +13,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "di"
+            baseName = "Shared"
             isStatic = true
         }
     }
@@ -24,7 +24,7 @@ kotlin {
         minSdk = libs.versions.android.minSdk.get().toInt()
 
         compilerOptions {
-            jvmTarget = JvmTarget.JVM_11
+            jvmTarget = JvmTarget.JVM_17
         }
         androidResources {
             enable = true
@@ -48,6 +48,10 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
+
+            implementation(project(path = ":feature:auth"))
+            implementation(project(path = ":data"))
+            implementation(project(path = ":navigation"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
