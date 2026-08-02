@@ -58,6 +58,7 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
             implementation(project(path = ":core:ui"))
             implementation(project(path = ":data"))
+            implementation(project(path = ":shared"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
