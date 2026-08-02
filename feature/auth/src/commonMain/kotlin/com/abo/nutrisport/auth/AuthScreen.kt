@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,11 +32,17 @@ import com.abo.nutrisport.TextWhite
 import com.abo.nutrisport.auth.component.GoogleButton
 import com.abo.nutrisport.auth.viewmodel.AuthViewModel
 import com.mmk.kmpauth.firebase.google.GoogleButtonUiContainerFirebase
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 import rememberMessageBarState
+import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
-fun AuthScreen() {
+fun AuthScreen(
+    navigateToHome: () -> Unit = {}
+) {
+    val scope = rememberCoroutineScope()
     val viewModel = koinViewModel<AuthViewModel>()
     val messageBarState = rememberMessageBarState()
     var loadingState by remember { mutableStateOf(false) }
@@ -89,9 +96,14 @@ fun AuthScreen() {
                                 user = user,
                                 onSuccess = {
                                     println("Authentication successful $user")
-                                    messageBarState.addSuccess("Authentication successful")
+                                    scope.launch {
+                                        messageBarState.addSuccess("Authentication successful")
+                                        delay(2000.milliseconds)
+                                        navigateToHome()
+                                    }
+
                                 },
-                                onError = {message->
+                                onError = { message ->
                                     println("Authentication failed $message")
                                     messageBarState.addError(message)
                                 }
